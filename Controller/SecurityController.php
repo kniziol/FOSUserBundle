@@ -41,6 +41,14 @@ class SecurityController extends Controller
      */
     public function loginAction(Request $request)
     {
+        /*
+         * Logged in user?
+         * Let's make it unavailable
+         */
+        if (null !== $this->getUser()) {
+            throw $this->createNotFoundException('Unavailable for logged in user. What are you doing here?');
+        }
+
         /** @var $session Session */
         $session = $request->getSession();
 

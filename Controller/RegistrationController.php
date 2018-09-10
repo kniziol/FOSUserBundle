@@ -55,6 +55,14 @@ class RegistrationController extends Controller
      */
     public function registerAction(Request $request)
     {
+        /*
+         * Logged in user?
+         * Let's make it unavailable
+         */
+        if (null !== $this->getUser()) {
+            throw $this->createNotFoundException('Unavailable for logged in user. What are you doing here?');
+        }
+
         $user = $this->userManager->createUser();
         $user->setEnabled(true);
 

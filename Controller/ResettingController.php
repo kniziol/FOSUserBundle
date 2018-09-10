@@ -68,6 +68,14 @@ class ResettingController extends Controller
      */
     public function requestAction()
     {
+        /*
+         * Logged in user?
+         * Let's make it unavailable
+         */
+        if (null !== $this->getUser()) {
+            throw $this->createNotFoundException('Unavailable for logged in user. What are you doing here?');
+        }
+
         return $this->render('@FOSUser/Resetting/request.html.twig');
     }
 
